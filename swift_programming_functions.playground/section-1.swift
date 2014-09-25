@@ -132,17 +132,3 @@ println("zero!")
 //    func stepBackward(input: Int) -> Int { return input - 1 }
 //    return backwards ? stepBackward : stepForward
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
