@@ -15,15 +15,15 @@ class ViewController: UIViewController {
     
     var kaka: Customer?
     
+    var country: Country?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         john = Person(name: "John Appleseed")
         number73 = Apartment(number: 73)
-        
         john!.apartment = number73
         number73!.tenant = john
-        
         // 当你把这两个变量设为nil时，两个析构函数被调用。打破了强应用循环
         john = nil
         number73 = nil
@@ -31,9 +31,14 @@ class ViewController: UIViewController {
         // 无主引用的实例
         kaka = Customer(name: "John Appleseed")
         kaka!.card = CreditCard(number: 1234_5678_9012_3456, customer: kaka!)
+        kaka = nil
+        // 此时 Customer 和 CreditCard 都被析构掉了
         
         //
-        kaka = nil
+        country = Country(name: "Canada", capitalName: "Ottawa")
+        // capitalCity的属性能被直接访问，而不需要通过感叹号来展开它的可选值
+        println("\(country!.name)'s capital city is called \(country!.capitalCity.name)")
+        country = nil
     }
 }
 
@@ -99,4 +104,32 @@ class CreditCard {
         self.customer = customer
     }
     deinit { println("Card #\(number) is being deinitialized") }
+}
+
+// 无主引用以及隐式解析可选属性
+// 存在着第三种场景，在这种场景中，两个属性都必须有值，并且初始化完成后不能为nil。在这种场景中，需要一个类使用无主属性，而另外一个类使用隐式解析可选属性。
+class Country {
+    let name: String
+    // 通常情况下，只有当类初始化完成之后才能访问 self, 为了实现能在构造函数中访问 self, 可以将该变量声明成隐式解析可选类型的属性,在后面加 !
+    // Country的构造函数调用了City的构造函数。然而，只有Country的实例完全初始化完后，Country的构造函数才能把self传给City的构造函数。
+    let capitalCity: City!
+    init(name: String, capitalName: String) {
+        self.name = name
+        // 如果不声明成隐式解析可选类型，这里不能将 self 作为参数传入
+        self.capitalCity = City(name: capitalName, country: self)
+    }
+    deinit{
+        println("Country : \(name) is being deinitialized")
+    }
+}
+class City {
+    let name: String
+    unowned let country: Country
+    init(name: String, country: Country) {
+        self.name = name
+        self.country = country
+    }
+    deinit{
+        println("City : \(name) is being deinitialized")
+    }
 }
