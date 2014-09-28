@@ -145,6 +145,23 @@ class City {
 
 // 闭包引起的循环强引用
 // 循环强引用的产生，是因为闭包和类相似，都是引用类型。当你把一个闭包赋值给某个属性时，你也把一个引用赋值给了这个闭包。
+// Swift 提供了一种优雅的方法来解决这个问题，称之为闭包占用列表（closuer capture list）
+// 捕获列表中的每个元素都是由weak或者unowned关键字和实例的引用（如self或someInstance）成对组成。每一对都在方括号中，通过逗号分开。
+/*
+@lazy var someClosure: (Int, String) -> String = {
+    [unowned self] (index: Int, stringToProcess: String) -> String in
+    // closure body goes here
+}
+@lazy var someClosure: () -> String = {
+    [unowned self] in
+    // closure body goes here
+}
+*/
+
+// 当闭包和捕获的实例总是互相引用时并且总是同时销毁时，将闭包内的捕获定义为无主引用。
+// 相反的，当捕获引用有时可能会是nil时，将闭包内的捕获定义为弱引用。弱引用总是可选类型，并且当引用的实例被销毁后，弱引用的值会自动置为nil。这使我们可以在闭包内检查它们是否存在。
+// 注意:如果捕获的引用绝对不会置为nil，应该用无主引用，而不是弱引用。
+
 class HTMLElement {
     
     let name: String
@@ -153,6 +170,8 @@ class HTMLElement {
     // 这里声明了一个 lazy 属性，只有当初始化完成以及 self 确实存在时候，才能访问 lazy 属性。所以在闭包里面可以访问到 self
     lazy var asHTML: () -> String = {
         // 这里引用了 self.text, self.name 等，所以该闭包持有 HTMLElement 实例，形成了循环强引用
+        // 通过添加捕获列表来打破强循环引用
+        [unowned self] in
         if let text = self.text {
             return "<\(self.name)>\(text)</\(self.name)>"
         } else {
