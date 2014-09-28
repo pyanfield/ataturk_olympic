@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>52428160-D5E7-468F-93ED-384DAD2D0D9B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>swift_programming_arc</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7DF70114B60DB73D31694760B62C81BE0E93C48E</key>
+		<string>https://github.com/pyanfield/ataturk_olympic.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>swift_programming_arc/swift_programming_arc.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7DF70114B60DB73D31694760B62C81BE0E93C48E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/pyanfield/ataturk_olympic.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7DF70114B60DB73D31694760B62C81BE0E93C48E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7DF70114B60DB73D31694760B62C81BE0E93C48E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ataturk_olympic</string>
+		</dict>
+	</array>
+</dict>
+</plist>
