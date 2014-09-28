@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     
     var country: Country?
     
+    var paragraph: HTMLElement?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +41,12 @@ class ViewController: UIViewController {
         // capitalCity的属性能被直接访问，而不需要通过感叹号来展开它的可选值
         println("\(country!.name)'s capital city is called \(country!.capitalCity.name)")
         country = nil
+        
+        //
+        paragraph = HTMLElement(name: "p", text: "hello, world")
+        println(paragraph!.asHTML())
+        paragraph = nil
+        // HTMLElement 实例没有被析构
     }
 }
 
@@ -131,5 +139,33 @@ class City {
     }
     deinit{
         println("City : \(name) is being deinitialized")
+    }
+}
+
+
+// 闭包引起的循环强引用
+// 循环强引用的产生，是因为闭包和类相似，都是引用类型。当你把一个闭包赋值给某个属性时，你也把一个引用赋值给了这个闭包。
+class HTMLElement {
+    
+    let name: String
+    let text: String?
+    
+    // 这里声明了一个 lazy 属性，只有当初始化完成以及 self 确实存在时候，才能访问 lazy 属性。所以在闭包里面可以访问到 self
+    lazy var asHTML: () -> String = {
+        // 这里引用了 self.text, self.name 等，所以该闭包持有 HTMLElement 实例，形成了循环强引用
+        if let text = self.text {
+            return "<\(self.name)>\(text)</\(self.name)>"
+        } else {
+            return "<\(self.name) />"
+        }
+    }
+    
+    init(name: String, text: String? = nil) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        println("\(name) is being deinitialized")
     }
 }
