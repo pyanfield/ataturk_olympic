@@ -409,6 +409,9 @@ let cha: Character = "7"
 let unusualMenagerie = "Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪"
 println("unusualMenagerie has \(countElements(unusualMenagerie)) characters")
 
+unusualMenagerie.utf16Count
+unusualMenagerie.lowercaseString
+
 // 不同的 Unicode 字符以及相同 Unicode 字符的不同表示方式可能需要不同数量的内存空间来存储。
 // 所以 Swift 中的字符在一个字符串中并不一定占用相同的内存空间。因此字符串的长度不得不通过迭代字符串中每一个字符的长度来进行计算。
 // 如果您正在处理一个长字符串，需要注意countElements函数必须遍历字符串中的字符以精准计算字符串的长度。 
@@ -459,7 +462,7 @@ var testArr2: [Int] = []
 var testArr3 = [Int](count: 7, repeatedValue: 0)
 var testArr4 = Array(count: 7, repeatedValue: 0.0)
 
-// Swift 的字典使用Dictionary<KeyType, ValueType>定义,其中KeyType是字典中键的数据类型，ValueType是字典中对应于这些键所存储值的数据类型。
+// Swift 的字典使用Dictionary<KeyType, ValueType> ( 或者 [KeyType:ValueType] )定义,其中KeyType是字典中键的数据类型，ValueType是字典中对应于这些键所存储值的数据类型。
 // KeyType的唯一限制就是可哈希的，这样可以保证它是独一无二的，所有的 Swift 基本类型（例如String，Int， Double和Bool）都是默认可哈希的，并且所有这些类型都可以在字典中当做键使用。
 // 未关联值的枚举成员（参见枚举）也是默认可哈希的。
 
@@ -492,6 +495,14 @@ dic
 
 // 对字典来说，不可变性也意味着我们不能替换其中任何现有键所对应的值。不可变字典的内容在被首次设定之后不能更改。 
 // 不可变性对数组来说有一点不同，当然我们不能试着改变任何不可变数组的大小，但是我们可以重新设定相对现存索引所对应的值。
+
+// Nil Coalescing Operator  (a ?? b)
+// The nil coalescing operator is shorthand for the code below:
+//      a != nil ? a! : b
+let defaultColorName = "red"
+var userDefinedColorName: String?   // defaults to nil
+var colorNameToUse = userDefinedColorName ?? defaultColorName
+
 
 // 2.5
 for index in 1...5 {
