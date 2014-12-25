@@ -1,6 +1,7 @@
 // Playground - noun: a place where people can play
-
-import UIKit
+// when import UIKit, there is error when using sorted. 
+// http://stackoverflow.com/questions/26249784/implicit-returns-from-single-expression-closures-in-swift-playground
+//import UIKit
 
 // 2.7
 // 闭包是自包含的函数代码块，可以在代码中被传递和使用。 Swift 中的闭包与 C 和 Objective-C 中的代码块（blocks）以及其他一些编程语言中的 lambdas 函数比较相似。
@@ -42,7 +43,7 @@ var reversed1 = sorted(names, {
 // Swift 自动为内联函数提供了参数名称缩写功能，您可以直接通过$0,$1,$2来顺序调用闭包的参数。
 // 如果您在闭包表达式中使用参数名称缩写，您可以在闭包参数列表中省略对其的定义，并且对应参数名称缩写的类型会通过函数类型进行推断。
 // in关键字也同样可以被省略，因为此时闭包表达式完全由闭包函数体构成：
-var reversed2 = sorted(names, { $0 > $1 } )
+var reversed2 = sorted(names, { $0 > $1 })
 
 // 而对于 sorted 还可以使用运算符函数
 reversed2 = sorted(names, >)

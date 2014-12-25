@@ -25,7 +25,7 @@ struct BlackjackCard {
             case .Jack, .Queen, .King:
                 return Values(first: 10, second: nil)
             default:
-                return Values(first: self.toRaw(), second: nil)
+                return Values(first: self.rawValue, second: nil)
                 }
         }
     }
@@ -33,7 +33,7 @@ struct BlackjackCard {
     // BlackjackCard 的属性和方法
     let rank: Rank, suit: Suit
     var description: String {
-        var output = "suit is \(suit.toRaw()),"
+        var output = "suit is \(suit.rawValue),"
             output += " value is \(rank.values.first)"
             if let second = rank.values.second {
                 output += " or \(second)"
@@ -45,5 +45,5 @@ struct BlackjackCard {
 let theAceOfSpades = BlackjackCard(rank: .Ace, suit: .Spades)
 println("theAceOfSpades: \(theAceOfSpades.description)")
 
-let heartsSymbol = BlackjackCard.Suit.Hearts.toRaw()
+let heartsSymbol = BlackjackCard.Suit.Hearts.rawValue
 

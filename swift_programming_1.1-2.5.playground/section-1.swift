@@ -150,14 +150,15 @@ enum Rank: Int {
         case .King:
             return "king"
         default:
-            return String(self.toRaw())
+            return String(self.rawValue)
         }
     }
 }
 // toRaw() ,fromRaw() 实现枚举值和原始值的转换
 let ace = Rank.Ace
-let aceRawValue = ace.toRaw()
-Rank.fromRaw(11)?.simpleDescription()
+let aceRawValue = ace.rawValue
+Rank(rawValue: 11)?.simpleDescription()
+Rank.Five.simpleDescription()
 
 enum Suit {
     case Spades, Hearts, Diamonds, Clubs
